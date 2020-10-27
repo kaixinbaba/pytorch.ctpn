@@ -30,20 +30,20 @@ def anchor_target_layer(image,rpn_cls_score, gt_boxes, im_info, _feat_stride=[16
     rpn_bbox_outside_weights: (HxWxA, 4) used to balance the fg/bg,
                             beacuse the numbers of bgs and fgs mays significiantly different
     """
-    try:
-   
-        for item in gt_boxes:
-            color = (0,0,255)
-            image1 = cv2.rectangle(image,(int(item[0]),int(item[1])),(int(item[2]),int(item[3])),color)
-        cv2.imwrite('result_auchor.jpg',image1)
-    except:
-        print('warning!!!!!')
+    # try:
+    #
+    #     for item in gt_boxes:
+    #         color = (0,0,255)
+    #         image1 = cv2.rectangle(image,(int(item[0]),int(item[1])),(int(item[2]),int(item[3])),color)
+    #     cv2.imwrite('result_auchor.jpg',image1)
+    # except:
+    #     print('warning!!!!!')
 
 
     _anchors = generate_anchors(scales=np.array(anchor_scales))  # 生成基本的anchor,一共9个
     _num_anchors = _anchors.shape[0]  # 9个anchor
     gt_boxes = np.array(gt_boxes)
-    
+    print(gt_boxes.shape)
     dontcareflag = gt_boxes[:,-1].reshape(-1)
     gt_boxes = gt_boxes[:,:-1]
 
