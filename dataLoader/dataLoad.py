@@ -98,7 +98,8 @@ class IC15Loader(data.Dataset):
             img_paths = []
             gt_paths = []
             for idx, img_name in enumerate(img_names):
-                if(not img_name.endswith('.jpg')):
+                ext = img_name.split('.')[-1].lower()
+                if ext != 'png' and ext != 'jpg' and ext != 'jpeg':
                     continue
                 img_path = data_dir + img_name
                 img_paths.append(img_path)

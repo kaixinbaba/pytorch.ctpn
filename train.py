@@ -38,7 +38,6 @@ def main(args):
     
     data_loader = IC15Loader(args.size_list)
     gt_files = data_loader.gt_paths
-    print(gt_files)
     train_loader = torch.utils.data.DataLoader(
                 data_loader,
                 batch_size=args.batch_size,
