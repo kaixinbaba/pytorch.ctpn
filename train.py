@@ -69,7 +69,6 @@ def main(args):
         loss_refine_list = []
 
         for batch_idx, (imgs, img_scales,im_shapes, gt_path_indexs,im_infos) in enumerate(train_loader):
-            print('batch index', batch_idx)
             data_loader.get_random_train_size()
 
             optimizer.zero_grad()
@@ -89,30 +88,29 @@ def main(args):
             batch_loss_ver = []
             batch_loss_refine = []
             for i in range(image.shape[0]):
+                try:
 
-                image_ori =  (imgs[i].numpy()*255).transpose((1,2,0)).copy()
+                    image_ori =  (imgs[i].numpy()*255).transpose((1,2,0)).copy()
 
-                gt_boxes = np.array(batch_res_polys[i])
+                    gt_boxes = np.array(batch_res_polys[i])
 
-                rpn_labels, rpn_bbox_targets, rpn_bbox_inside_weights, rpn_bbox_outside_weights = anchor_target_layer(
-                    image_ori, score_pre[i].cpu().unsqueeze(0), gt_boxes, im_infos[i].numpy())
+                    rpn_labels, rpn_bbox_targets, rpn_bbox_inside_weights, rpn_bbox_outside_weights = anchor_target_layer(
+                        image_ori, score_pre[i].cpu().unsqueeze(0), gt_boxes, im_infos[i].numpy())
 
-                rpn_labels = toTensor(rpn_labels)
-                rpn_bbox_targets = toTensor(rpn_bbox_targets)
-                rpn_bbox_inside_weights = toTensor(rpn_bbox_inside_weights)
-                rpn_bbox_outside_weights = toTensor(rpn_bbox_outside_weights)
+                    rpn_labels = toTensor(rpn_labels)
+                    rpn_bbox_targets = toTensor(rpn_bbox_targets)
+                    rpn_bbox_inside_weights = toTensor(rpn_bbox_inside_weights)
+                    rpn_bbox_outside_weights = toTensor(rpn_bbox_outside_weights)
 
-                loss_tatal, loss_cls, loss_ver, loss_refine = critetion(score_pre[i].unsqueeze(0), vertical_pred[i].unsqueeze(0), rpn_labels, rpn_bbox_targets)
+                    loss_tatal, loss_cls, loss_ver, loss_refine = critetion(score_pre[i].unsqueeze(0), vertical_pred[i].unsqueeze(0), rpn_labels, rpn_bbox_targets)
 
-                batch_loss_tatal.append(loss_tatal)
-                batch_loss_cls.append(loss_cls)
-                batch_loss_ver.append(loss_ver)
-                batch_loss_refine.append(loss_refine)
+                    batch_loss_tatal.append(loss_tatal)
+                    batch_loss_cls.append(loss_cls)
+                    batch_loss_ver.append(loss_ver)
+                    batch_loss_refine.append(loss_refine)
+                except Exception as e:
+                    print(e)
 
-                del(loss_tatal)
-                del(loss_cls)
-                del(loss_ver)
-                del(loss_refine)
 
             loss_tatal = sum(batch_loss_tatal)/len(batch_loss_tatal)
             loss_cls = sum(batch_loss_cls)/len(batch_loss_cls)
