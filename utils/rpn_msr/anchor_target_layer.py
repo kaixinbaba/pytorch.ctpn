@@ -43,7 +43,6 @@ def anchor_target_layer(image,rpn_cls_score, gt_boxes, im_info, _feat_stride=[16
     _anchors = generate_anchors(scales=np.array(anchor_scales))  # 生成基本的anchor,一共9个
     _num_anchors = _anchors.shape[0]  # 9个anchor
     gt_boxes = np.array(gt_boxes)
-    print(gt_boxes.shape)
     dontcareflag = gt_boxes[:,-1].reshape(-1)
     gt_boxes = gt_boxes[:,:-1]
 

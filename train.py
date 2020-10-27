@@ -109,7 +109,7 @@ def main(args):
                     batch_loss_ver.append(loss_ver)
                     batch_loss_refine.append(loss_refine)
                 except Exception as e:
-                    print(e)
+                    pass
 
 
             loss_tatal = sum(batch_loss_tatal)/len(batch_loss_tatal)
