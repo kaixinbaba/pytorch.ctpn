@@ -38,6 +38,7 @@ def main(args):
     
     data_loader = IC15Loader(args.size_list)
     gt_files = data_loader.gt_paths
+    print(gt_files)
     train_loader = torch.utils.data.DataLoader(
                 data_loader,
                 batch_size=args.batch_size,
@@ -69,7 +70,7 @@ def main(args):
         loss_refine_list = []
 
         for batch_idx, (imgs, img_scales,im_shapes, gt_path_indexs,im_infos) in enumerate(train_loader):
-
+            print('batch index', batch_idx)
             data_loader.get_random_train_size()
 
             optimizer.zero_grad()

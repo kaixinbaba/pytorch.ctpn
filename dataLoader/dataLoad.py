@@ -20,8 +20,12 @@ import os
 # ic15_train_gt_dir = ic15_root_dir + 'train_gt/'
 
 
-ic15_root_dir = '/home/aistudio/work/data/MTWI2018/'
-ic15_train_data_dir = ic15_root_dir + 'image/'
+# ic15_root_dir = '/home/aistudio/work/data/MTWI2018/'
+# ic15_train_data_dir = ic15_root_dir + 'image/'
+# ic15_train_gt_dir = ic15_root_dir + 'label/'
+
+ic15_root_dir = '/home/dev/junjiexun/anno/5/'
+ic15_train_data_dir = ic15_root_dir + 'images/'
 ic15_train_gt_dir = ic15_root_dir + 'label/'
 
 
