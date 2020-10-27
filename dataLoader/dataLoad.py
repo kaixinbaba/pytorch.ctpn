@@ -106,7 +106,7 @@ class IC15Loader(data.Dataset):
                 
 
                 # gt_name = 'gt_'+img_name.split('.')[0] + '.txt'
-                gt_name = img_name.split('.')[0] + '.txt'
+                gt_name = 'gt_' + img_name.split('.')[0] + '.txt'
                 gt_path = gt_dir + gt_name
                 gt_paths.append(gt_path)
 
